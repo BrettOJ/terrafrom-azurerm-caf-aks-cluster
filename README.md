@@ -134,10 +134,6 @@ Example
 aks_cluster_name = "test-aks1"
 ```
 
-
-
-
-```
 ## diagnostics_map
 (Required) Map with the diagnostics repository information"
 ```hcl
@@ -147,11 +143,11 @@ variable "diagnostics_map" {
 ```
 Example
 ```hcl
-  diagnostics_map = {
-      diags_sa      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arnaud-hub-operations/providers/Microsoft.Storage/storageAccounts/opslogskumowxv"
-      eh_id         = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arnaud-hub-operations/providers/Microsoft.EventHub/namespaces/opslogskumowxv"
-      eh_name       = "opslogskumowxv"
-  }
+diagnostics_map = {
+          diags_sa = "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/resource_group_name/providers/Microsoft.Storage/storageAccounts/name_space_storage_account",
+          eh_id = "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/resource_group_name/providers/Microsoft.EventHub/namespaces/name_space_name",
+          eh_name = "name_space_name"
+        }
 ```
 ## log_analytics_workspace_id
 (Required) Log Analytics Workspace details
@@ -162,29 +158,33 @@ variable "log_analytics_workspace_id" {
 ```
 Example
 ```hcl
-  log_analytics_workspace_id =  "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ftau-hub-operations/providers/microsoft.operationalinsights/workspaces/ftaulevel1"
+  log_analytics_workspace_id =  "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resource_group_name/providers/microsoft.operationalinsights/workspaces/workspace_name"
 ```
 
-## diagnostics_settings
+## diag_object
 (Required) Map with the settings for diagnostics of Azure Firewall
 ```hcl
-variable "diagnostics_settings" {
+variable "diag_object" {
  description = "(Required) Map with the diagnostics repository information"
 }
 ```
 Example
 
 ```hcl
-diagnostics_settings = {
-    log = [
-                #["Category name",  "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period] 
-                ["AzureFirewallApplicationRule", true, true, 30],
-                ["AzureFirewallNetworkRule", true, true, 30],
+diag_object = {
+        log = [
+            #["Category name",  "Diagnostics Enabled", "Retention Enabled", Retention period] 
+            ["kube-apiserver", true, true, 30],
+            ["kube-controller-manager", true, true, 30],
+            ["kube-scheduler", true, true, 30],
+            ["kube-audit", true, true, 30],
+            ["cluster-autoscaler", true, true, 30]
         ]
-    metric = [
-               ["AllMetrics", true, true, 30],
-    ]
+        metric = [
+            ["AllMetrics", true, true, 30],
+        ]
 }
+
 ```
 
 ## convention
@@ -206,11 +206,6 @@ convention = "cafclassic"
 Returns the full set of created resource groups as a map, as follows:
 
 ```hcl
-
-
-
-
-
 
 
 ```

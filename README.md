@@ -201,11 +201,13 @@ convention = "cafclassic"
 
 # Output
 
-## object
+| Name | Type | Description | 
+| -- | -- | -- | 
+| object | object | Returns the full object of the created AKS Cluster. |
+| id | string | Returns the ID of the created AKS Cluster. | 
+| kube_config | string | Returns the kube_config of the created AKS Cluster. | 
+| client_key | string | Returns the client_key of the created AKS Cluster. | 
+| client_certificate | string | Returns the client_certificate of the created AKS Cluster. | 
+| cluster_ca_certificate | string | Returns the cluster_ca_certificate of the created AKS Cluster. | 
+| host | string | Returns the host of the created AKS Cluster. | 
 
-Returns the full set of created resource groups as a map, as follows:
-
-```hcl
-
-
-```

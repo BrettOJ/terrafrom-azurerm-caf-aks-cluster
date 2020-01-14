@@ -203,7 +203,7 @@ convention = "cafclassic"
 
 | Name | Type | Description | 
 | -- | -- | -- | 
-| object | object | Returns the full object of the created AKS Cluster. |
+| azurerm_kubernetes_cluster | object | Returns the full object of the created AKS Cluster. |
 | id | string | Returns the ID of the created AKS Cluster. | 
 | kube_config | string | Returns the kube_config of the created AKS Cluster. | 
 | client_key | string | Returns the client_key of the created AKS Cluster. | 

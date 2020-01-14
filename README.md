@@ -186,7 +186,34 @@ diag_object = {
 }
 
 ```
+## default_node_pool
+(Required)  map object of the settings of the default node pool
 
+```hcl
+variable "default_node_pool" {
+  description = "(Required)  map object of the settings of the default node pool"
+}
+```
+Example
+```hcl
+default_node_pool = {
+        name = "aksnodepool" 
+        vm_size = "Standard_D2_v2"
+        node_count = 1
+        availability_zones = ""
+        enable_auto_scaling = false
+        enable_node_public_ip = false
+        max_pods = 10
+        node_taints = "string"
+        os_disk_size_gb = 60
+        type = "VirtualMachineScaleSets" # "AvailabilitySet"
+        vnet_subnet_id = "string"
+        If enable_auto_scaling is set to true, then the following fields can also be configured:
+        max_count = 4
+        min_count  = 1  
+}
+
+```
 ## convention
 (Required) Naming convention to be used.
 ```hcl

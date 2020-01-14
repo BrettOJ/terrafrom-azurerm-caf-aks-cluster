@@ -8,7 +8,7 @@ Reference the module to a specific version (recommended):
 ```hcl
 module "azurerm_kubernetes_cluster" {
 
-    source  = "aztfmod/caf-kubernetes-cluster/azurerm"
+    source  = "aztfmod/terrafrom-caf-aks-cluster/azurerm"
     version = "0.1.0"
   
       dns_prefix          = "aks-${var.app_name}-${var.env}-${local.random}"
@@ -25,7 +25,7 @@ Or get the latest version
 
 module "azurerm_kubernetes_cluster" {
 
-    source  = "aztfmod/caf-kubernetes-cluster/azurerm"
+    source  = "git://github.com/aztfmod/.git?ref=latest"
       dns_prefix          = "aks-${var.app_name}-${var.env}-${local.random}"
       resource_group_name = var.resource_group_name
       location            = var.location
@@ -48,41 +48,155 @@ variable "resource_group_name" {
   type        = string
 }
 ```
-
+Example
 ```hcl
-variable "aks_cluster_name" {
-  description = "Name of the aks cluster"
-}
+name = "aks-cluster-rg"
 ```
- 
-```hcl
-
-
-```
-
-```hcl
-
-
-```
-
-```hcl
-
-```
-
 ## prefix
 
-(Optional) You can use a prefix to add to the list of resource groups you want to create
+(optional) Prefix to be added to resources created with this module
 
 ```hcl
-
+variable "prefix" {
+  description = "Prefix to be added to resources created with this module"
+}
+```
+Example
+```hcl
+prefix = "aks"
 ```
 
+## location
+
+(Required) location map of locations to deploy the resources
+
+```hcl
+variable "location" {
+  description = "(Required) location map of locations to deploy the resources"
+}
+```
+Example
+```hcl
+location = {
+  region1 = "southeastasia"
+  region2 = "eastasia"
+}
+
+```
+## tags
+
+(required) tags map for the tags that will be added to resources in the deployment
+
+```hcl
+variable "tags" {
+  description = "(required) tags map for the tags that will be added to resources in the deployment"
+}
+```
+Example
+```hcl
+tags = {
+    environment     = "DEV"
+    owner           = "Avanade"
+    deploymentType  = "Terraform"
+    costCenter      = "1664"
+    BusinessUnit    = "SHARED"
+    DR              = "NON-DR-ENABLED"
+}
+```
+## service_principal
+
+(optional) the service principal to be used by the AKS cluster
+
+```hcl
+service_principal = {
+    client_id     = "client_id"
+    client_secret = "client_secret"
+  }
+```
+Example
+```hcl
+service_principal = {
+    client_id     = "00000000000000000000000000000000"
+    client_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  }
+```
+## aks_cluster_name
+
+(required) aks cluster name to be used for the cluster
+
+```hcl
+variable  aks_cluster_name" {
+  description = "(required) aks cluster name to be used for the cluster"
+}
+```
+Example
+```hcl
+aks_cluster_name = "test-aks1"
+```
+
+
+
+
+```
+## diagnostics_map
+(Required) Map with the diagnostics repository information"
+```hcl
+variable "diagnostics_map" {
+ description = "(Required) Map with the diagnostics repository information"
+}
+```
+Example
+```hcl
+  diagnostics_map = {
+      diags_sa      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arnaud-hub-operations/providers/Microsoft.Storage/storageAccounts/opslogskumowxv"
+      eh_id         = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arnaud-hub-operations/providers/Microsoft.EventHub/namespaces/opslogskumowxv"
+      eh_name       = "opslogskumowxv"
+  }
+```
+## log_analytics_workspace_id
+(Required) Log Analytics Workspace details
+```hcl
+variable "log_analytics_workspace_id" {
+  description = "(Required) Log Analytics ID for the AzFW diagnostics"
+}
+```
+Example
+```hcl
+  log_analytics_workspace_id =  "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ftau-hub-operations/providers/microsoft.operationalinsights/workspaces/ftaulevel1"
+```
+
+## diagnostics_settings
+(Required) Map with the settings for diagnostics of Azure Firewall
+```hcl
+variable "diagnostics_settings" {
+ description = "(Required) Map with the diagnostics repository information"
+}
+```
 Example
 
 ```hcl
+diagnostics_settings = {
+    log = [
+                #["Category name",  "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period] 
+                ["AzureFirewallApplicationRule", true, true, 30],
+                ["AzureFirewallNetworkRule", true, true, 30],
+        ]
+    metric = [
+               ["AllMetrics", true, true, 30],
+    ]
+}
+```
 
-
-
+## convention
+(Required) Naming convention to be used.
+```hcl
+variable "convention" {
+  description = "(Required) Naming convention used"
+}
+```
+Example
+```hcl
+convention = "cafclassic"
 ```
 
 # Output

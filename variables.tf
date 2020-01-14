@@ -1,10 +1,13 @@
+variable "resource_groups" {
+  description = "(required) map of the resource groups to be created"
+}
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
 }
 
 variable "location" {
-  description = "The Azure Region in which all resources in this example should be provisioned"
+  description = "(required)The Azure Region in which all resources in this example should be provisioned"
 }
 
 variable "tags" {
@@ -16,9 +19,6 @@ variable "service_principal" {
 }
 
 variable "aks_cluster_name" {
-
-}
-variable "resource_groups" {
 
 }
 

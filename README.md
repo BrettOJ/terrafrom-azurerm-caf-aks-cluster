@@ -162,7 +162,7 @@ Example
 ```
 
 ## diag_object
-(Required) Map with the settings for diagnostics of Azure Firewall
+(Required) Map with the settings for diagnostics of the AKS Cluster
 ```hcl
 variable "diag_object" {
  description = "(Required) Map with the diagnostics repository information"

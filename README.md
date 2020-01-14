@@ -96,7 +96,7 @@ Example
 ```hcl
 tags = {
     environment     = "DEV"
-    owner           = "Avanade"
+    owner           = "BrettOJ"
     deploymentType  = "Terraform"
     costCenter      = "1664"
     BusinessUnit    = "SHARED"

@@ -1,9 +1,5 @@
-variable "resource_groups" {
-  description = "(required) map of the resource groups to be created"
-}
-
-variable "prefix" {
-  description = "A prefix used for all resources in this example"
+variable "rg" {
+  description = "(required) map of the resource group for the AKS cluster"
 }
 
 variable "location" {
@@ -20,6 +16,9 @@ variable "service_principal" {
 
 variable "aks_cluster_name" {
   description = "(Required) base name for the AKS cluster"
+}
+variable "aks_node_rg" {
+ description = "(Required) the resourece group for the AKS cluster nodes"
 }
 
 variable "log_analytics_workspace_id" {
